@@ -1,10 +1,5 @@
 <template>
-  <div class="page">
-    <p>{{ counter }}</p>
-    <button @click="counter += 1">
-      click!
-    </button>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
