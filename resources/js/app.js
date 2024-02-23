@@ -4,11 +4,13 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import Home from '@/Page/Home.vue'
-import About from '@/Page/About.vue'
+import ClientList from '@/Page/ClientList.vue'
+import ClientNewCreate from '@/Page/ClientNewCreate.vue'
 
 const routes = [
   {path: '/', name: 'Home', component: Home},
-  {path: '/about', name: 'About', component: About}
+  {path: '/client_list', name: 'ClientList', component: ClientList},
+  {path: '/client_new', name: 'About', component: ClientNewCreate}
 ]
 
 const router = createRouter({
