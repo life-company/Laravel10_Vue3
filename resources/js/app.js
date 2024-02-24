@@ -9,8 +9,8 @@ import ClientNewCreate from '@/Page/ClientNewCreate.vue'
 
 const routes = [
   {path: '/', name: 'Home', component: Home},
-  {path: '/client_list', name: 'ClientList', component: ClientList},
-  {path: '/client_new', name: 'About', component: ClientNewCreate}
+  {path: '/clients_list', name: 'ClientList', component: ClientList},
+  {path: '/clients_new', name: 'About', component: ClientNewCreate}
 ]
 
 const router = createRouter({

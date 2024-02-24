@@ -4,57 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Http\Requests\UpStoreUserRequest;
 
 class ClientController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 全てのクライアントデータを取得してJSON形式で返す。
+     *
+     * このメソッドは、データベースから全クライアントの情報を取得し、
+     * それらをJSON形式でレスポンスとして返します。各クライアント情報は、
+     * `clients` キーの下に配列として格納されます。
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *         クライアント情報のコレクションを含むJSONレスポンス。
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::getAllClients();
         return response()->json(['clients' => $clients]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新しいクライアントを登録します。
+     *
+     * このメソッドは、HTTPリクエストを受け取り、クライアント情報を登録した後、
+     * 成功レスポンスを返します。
+     *
+     * @param  \Illuminate\Http\Request  $request  HTTPリクエストインスタンス。クライアント情報が含まれます。
+     * @return \Illuminate\Http\Response 登録成功時には204 No Contentレスポンスを返します。
      */
-    public function create()
+    public function store(UpStoreUserRequest $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        Client::create([
-            'name' => $request->name,
-        ]);
-        return response()->json(['message' => 'Client created successfully!']);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        // リクエストデータを配列として渡す
+        $client = Client::register($request->all());
+        return response()->noContent();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpStoreUserRequest $request, string $id)
     {
         //
     }

@@ -2,7 +2,7 @@
   {{ formData.message }}
   <ul>
     <li v-for="client in formData.clients" :key="client.id">
-      {{ client.name }}
+      {{ client.client_name }}
     </li>
   </ul>
 </template>
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('/api/client/list')
+      axios.get('/api/clients/list')
         .then(response => {
           this.formData.clients = response.data.clients
           console.info(this.formData.clients)
