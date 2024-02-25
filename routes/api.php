@@ -7,5 +7,9 @@ use App\Http\Controllers\ClientController;
 /**
  * 顧客関連
  */
-Route::get('/clients/list', [ClientController::class, 'index']); //一覧取得処理
-Route::post('/clients/create', [ClientController::class, 'store']);//登録処理
+Route::prefix('/clients')->group(function () {
+  Route::get('/list', [ClientController::class, 'index']);
+  Route::post('/create', [ClientController::class, 'store']);
+  Route::put('/update', [ClientController::class, 'update']);
+  Route::delete('/delete/{id}', [ClientController::class, 'destroy']);
+});

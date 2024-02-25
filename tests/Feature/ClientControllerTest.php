@@ -20,7 +20,6 @@ class ClientControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-
     /**
      * クライアント一覧正常系テスト
      * @test
@@ -63,5 +62,29 @@ class ClientControllerTest extends TestCase
             'client_person_phone' => '090-1234-5678',
             'client_memo' => 'テストメモ',
         ]);
+    }
+
+    /**
+     * クライアント更新正常系テスト
+     * @test
+     * @return 204 or 404
+     */
+    public function test_clients_update_success()
+    {
+        $user = User::factory()->create();
+        $formData = [
+            'id' => '3',
+            'client_name' => '自動テストクライアント更新',
+            'client_post' => '123-4567',
+            'client_address' => 'テスト住所',
+            'client_url' => 'http://exsample.com',
+            'client_person' => 'テスト担当者',
+            'client_person_phone' => '090-1234-5678',
+            'client_memo' => 'テストメモ',
+        ];
+
+        $response = $this->actingAs($user)->putJson('/api/clients/update', $formData);
+        // レコードが存在しなければ404を返却する
+        $response->assertStatus(404);
     }
 }
